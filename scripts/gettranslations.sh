@@ -1,18 +1,18 @@
 #!/bin/bash
 
-while getopts f:d:i:n:b:m:c:s:e:t: flag
+while getopts h:f:d:i:n:p:c:b:s:e: flag
 do
     case "${flag}" in
+        h) localization_api_host=${OPTARG};;
         f) translation_format=${OPTARG};;
         d) translation_folder=${OPTARG};;
         i) individual_locale_files=${OPTARG};;
         n) translation_filename=${OPTARG};;
-        b) branch_prefix=${OPTARG};;
-        m) commit_changes=${OPTARG};;
-        c) create_branch=${OPTARG};;
+        p) branch_prefix=${OPTARG};;
+        c) commit_changes=${OPTARG};;
+        b) create_branch=${OPTARG};;
         s) namespace=${OPTARG};;
         e) feature=${OPTARG};;
-        t) auth_token=${OPTARG};;
     esac
 done
 
@@ -27,10 +27,6 @@ else
     mkdir -p ./"$translation_folder"
 fi
 
-#LOCALIZATION_API_HOST="https://localization-api.gympass.com"
-LOCALIZATION_API_HOST="https://localization-api.gympass-staging.com"
-LOCALIZATION_ENDPOINT="$LOCALIZATION_API_HOST/v1/translations/$namespace/$feature"
-
 # FORMATTING
 if [ "$translation_format" == "flat" ] | [ "$translation_format" == "levels" ]
 then 
@@ -40,8 +36,8 @@ else
     translation_format="flat"
 fi
 
-LOCALIZATION_ENDPOINT="$LOCALIZATION_ENDPOINT?format=$translation_format"   
-TRANSLATIONS=`/usr/bin/curl -v --URL "$LOCALIZATION_ENDPOINT" -H 'Authorization: Bearer '"$auth_token"''`
+LOCALIZATION_ENDPOINT="$localization_api_host/v1/translations/$namespace/$feature?format=$translation_format"   
+TRANSLATIONS=`/usr/bin/curl -v --URL "$LOCALIZATION_ENDPOINT"`
 if [ "$individual_locale_files" = true ]
 then
     echo $TRANSLATIONS | jq -r '. | keys[]' | 
@@ -51,9 +47,7 @@ then
 else
     echo $TRANSLATIONS | jq > ./"$translation_folder"/"$translation_filename"
     echo 'New translations file created'
-fi    
-
-#####
+fi
 
 if [ "$commit_changes" = true ]
 then

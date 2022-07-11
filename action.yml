@@ -5,6 +5,9 @@ branding:
   color: gray-dark
   icon: archive
 inputs: 
+  localization_api_host:
+    description: "the localization-api host to be called for getting translations"
+    required: true
   translation_format: 
     description: "format: flat or levels"
     required: true
@@ -32,13 +35,10 @@ inputs:
   feature:
     description: "the feature to be get from the translation keys"
     required: true
-  localization_auth_token:
-    description: "the authorization token for calling the localization api endpoints"
-    required: true
 runs: 
   using: composite
   steps:
-    - name: "Create PR"
+    - name: "Get translations"
       id: pr
-      run: chmod +x "${{ github.action_path }}/scripts/gettranslations.sh" && "${{ github.action_path }}/scripts/gettranslations.sh" -f '${{ inputs.translation_format }}' -d '${{ inputs.translation_folder }}' -i '${{ inputs.individual_locale_files }}' -n '${{ inputs.translation_filename }}' -b '${{ inputs.branch_prefix }}' -m '${{ inputs.commit_changes }}' -c '${{ inputs.create_branch }}' -s '${{ inputs.namespace }}' -e '${{ inputs.feature }}' -t '${{ inputs.localization_auth_token }}'
+      run: chmod +x "${{ github.action_path }}/scripts/gettranslations.sh" && "${{ github.action_path }}/scripts/gettranslations.sh" -h '${{ inputs.localization_api_host }}' -f '${{ inputs.translation_format }}' -d '${{ inputs.translation_folder }}' -i '${{ inputs.individual_locale_files }}' -n '${{ inputs.translation_filename }}' -p '${{ inputs.branch_prefix }}' -c '${{ inputs.commit_changes }}' -b '${{ inputs.create_branch }}' -s '${{ inputs.namespace }}' -e '${{ inputs.feature }}'
       shell: bash
