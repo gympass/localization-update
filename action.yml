@@ -29,9 +29,6 @@ inputs:
   create_branch: 
     default: true
     description: "whether to create a new branch with translations or not"
-  create_pull_request:
-    default: false
-    description: "wheter to create a pull request of the new translations to the main branch or not"
   main_branch_name:    
     default: master
     description: "the name of the main branch. Default name is master"
@@ -46,5 +43,5 @@ runs:
   steps:
     - name: "Get translations"
       id: pr
-      run: chmod +x "${{ github.action_path }}/scripts/gettranslations.sh" && "${{ github.action_path }}/scripts/gettranslations.sh" -h '${{ inputs.localization_api_host }}' -f '${{ inputs.translation_format }}' -d '${{ inputs.translation_folder }}' -i '${{ inputs.individual_locale_files }}' -n '${{ inputs.translation_filename }}' -p '${{ inputs.branch_prefix }}' -c '${{ inputs.commit_changes }}' -b '${{ inputs.create_branch }}' -r '${{ inputs.create_pull_request }}' -m '${{ inputs.main_branch_name }}' -s '${{ inputs.namespace }}' -e '${{ inputs.feature }}'
+      run: chmod +x "${{ github.action_path }}/scripts/gettranslations.sh" && "${{ github.action_path }}/scripts/gettranslations.sh" -h '${{ inputs.localization_api_host }}' -f '${{ inputs.translation_format }}' -d '${{ inputs.translation_folder }}' -i '${{ inputs.individual_locale_files }}' -n '${{ inputs.translation_filename }}' -p '${{ inputs.branch_prefix }}' -c '${{ inputs.commit_changes }}' -b '${{ inputs.create_branch }}' -m '${{ inputs.main_branch_name }}' -s '${{ inputs.namespace }}' -e '${{ inputs.feature }}'
       shell: bash

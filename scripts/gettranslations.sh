@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts h:f:d:i:n:p:c:b:r:m:s:e: flag
+while getopts h:f:d:i:n:p:c:b:m:s:e: flag
 do
     case "${flag}" in
         h) localization_api_host=${OPTARG};;
@@ -11,7 +11,6 @@ do
         p) branch_prefix=${OPTARG};;
         c) commit_changes=${OPTARG};;
         b) create_branch=${OPTARG};;
-        r) create_pull_request=${OPTARG};;
         m) main_branch_name=${OPTARG};;
         s) namespace=${OPTARG};;
         e) feature=${OPTARG};;
@@ -70,14 +69,5 @@ then
         echo "No changes were made."
     else
         git push --set-upstream origin $branch
-    fi
-
-    if [ "$create_pull_request" = true ]
-    then
-        if [ "$branch" != "master" ]
-        then
-            gh pr create --title "Auto gen - new translations - " --body "OK"
-            gh pr create --base master
-        fi
     fi    
 fi
