@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts h:f:d:i:n:p:c:b:s:e: flag
+while getopts h:f:d:i:n:p:c:b:r:m:s:e: flag
 do
     case "${flag}" in
         h) localization_api_host=${OPTARG};;
@@ -11,6 +11,8 @@ do
         p) branch_prefix=${OPTARG};;
         c) commit_changes=${OPTARG};;
         b) create_branch=${OPTARG};;
+        r) create_pull_request=${OPTARG};;
+        m) main_branch_name=${OPTARG};;
         s) namespace=${OPTARG};;
         e) feature=${OPTARG};;
     esac
@@ -51,11 +53,12 @@ fi
 
 if [ "$commit_changes" = true ]
 then
+    branch="$main_branch_name"
     if [ "$create_branch" = true ]
     then
         timestamp=$(date +%s)
-        new_branch="$branch_prefix"_"$timestamp"
-        git checkout -b $new_branch
+        branch="$branch_prefix"_"$timestamp"
+        git checkout -b $branch
     fi
 
     git add .
@@ -66,9 +69,15 @@ then
     then
         echo "No changes were made."
     else
-        git push --set-upstream origin $new_branch
+        git push --set-upstream origin $branch
     fi
-fi
 
-#gh pr create --title "Test PR" --body "OK"
-#gh pr create --base master
+    if [ "$create_pull_request" = true ]
+    then
+        if [ "$branch" != "master" ]
+        then
+            gh pr create --title "Auto gen - new translations - " --body "OK"
+            gh pr create --base master
+        fi
+    fi    
+fi
