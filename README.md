@@ -77,7 +77,7 @@ jobs:
     - name: Update translations
       uses: gympass/localization-update@v0.0.4
       with:
-        localization_api_host: https://localization-api.gympass-staging.com
+        localization_api_host: https://localization-api.gympass.com
         translation_format: flat
         translation_folder: lang
         translation_filename: trs.json
