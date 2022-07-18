@@ -55,7 +55,7 @@ In the table bellow you see the possible parameters and theys porpose:
 | feature                 | The feature of the application. If all the keys, of all the features <br /> are wanted, this parameter should be set with the same <br /> value as the 'namespace' parameter | yes | 
 <br />
 <br />
-### Example
+###Example
 
 This is an example of a workflow yaml using this action:
 
