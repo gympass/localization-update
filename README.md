@@ -75,7 +75,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Update translations
-      uses: gympass/localization-update@v0.0.4
+      uses: gympass/localization-update@v1
       with:
         localization_api_host: https://localization-api.gympass.com
         translation_format: flat
