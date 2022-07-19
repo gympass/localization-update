@@ -46,7 +46,7 @@ In the table bellow you see the possible parameters and theys purpose:
 | translation_format      | The format of the json containing the <br /> translation keys. Possible values are: <br /> flat <br /> levels | yes | |
 | translation_folder      | The folder on where the translation files are <br /> going to be created | yes | | 
 | individual_locale_files | Indicates wheter to create an individual file <br /> for each locale or not | no | false |
-| translation_filename    | The name of the file containing the translation <br /> keys. This applies only if the individual_locale_files <br /> parameter is set to false | no | auto_gen_translations.json |
+| translation_filename    | The name of the file containing the translation <br /> keys. This applies only if the 'individual_locale_files' <br /> parameter is set to false | no | auto_gen_translations.json |
 | commit_changes          | Indicate whether the translation files are <br /> going to be commited or not | no | true |
 | create_branch           | Indicates wheather to create a branch with the <br /> new translation files or not. <br /> If set to false and the 'commit_changes' is set <br /> to true, the commit is made into the master branch. | no | true |
 | branch_prefix           | Defines a prefix to be used in the branch name. <br /> Only applies if the 'create_branch' parameter is <br /> set to true | no | auto_gen_translations |
