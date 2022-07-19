@@ -36,11 +36,11 @@ In the example above, the action only runs if the commit is made to the 'mater' 
 This action provides a set of parameters you can use for defining how the translation files are going to be created.
 You can specify the folder where the translation files are going to be created, if the files are going to be commited to the repository, if the commit will be in a new branch, etc.
 
-In the table bellow you see the possible parameters and theys porpose:
+In the table bellow you see the possible parameters and theys purpose:
 <br />
 <br />
 
-| Parameter               | Reason         | Is Required  | Default value |
+| Parameter               | Reason         | Required     | Default value |
 | ----------------------- | -------------- | ------------ | ------------- |
 | localization_api_host   | The localization-api host from where to get <br /> the translations | yes  | |
 | translation_format      | The format of the json containing the <br /> translation keys. Possible values are: <br /> flat <br /> levels | yes | |
