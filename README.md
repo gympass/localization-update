@@ -28,7 +28,7 @@ In the 'if' statement you can define the commit on which branch is gonna trigger
     - name: Update translations
       uses: gympass/localization-update@v1
 ```
-In the example above, the action only runs if the commit is made to the 'mater' or 'devint' branches, otherwise it is skiped.
+In the example above, the action only runs if the commit is made to the 'mater' branche or a branch containing 'devint' in the name, otherwise it is skiped.
 <br />
 <br />
 ### Parameters
