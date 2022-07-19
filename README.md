@@ -15,7 +15,7 @@ Example:
     - name: Update translations
       uses: gympass/localization-update@v1
 ```
-Is important to notice that this action is gonna runn everytime a commit is made to the repository, so it will act accordingly to the configuration parameters defined for the action everytime a commit is made.
+Is important to notice that this action is gonna run everytime a commit is made to the repository, so it will act accordingly to the configuration parameters defined for the action everytime a commit is made.
 If you don't want this to happen, you should define when this action should run by inserting an 'if' statement before it.
 In the 'if' statement you can define the commit on which branch is gonna trigger this action, like in the example:
 
