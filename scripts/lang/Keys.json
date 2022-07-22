@@ -1,0 +1,18 @@
+[
+  {
+    "Key": "footer.store.apple",
+    "Value": "App Store"
+  },
+  {
+    "Key": "footer.store.google",
+    "Value": "Google Play"
+  },
+  {
+    "Key": "logout",
+    "Value": "Log out"
+  },
+  {
+    "Key": "footer.apps.store.text",
+    "Value": "Download our app to discover a world of in-person and online wellbeing resources for your body, mind, and mood."
+  }
+]
