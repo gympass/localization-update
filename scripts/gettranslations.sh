@@ -37,7 +37,7 @@ else
 fi
 
 # FORMATTING
-if [[ $translation_format == "flat" ]] | [[ $translation_format == "levels" ]] 
+if [[ $translation_format == "flat" ]] || [[ $translation_format == "levels" ]] 
 then 
     echo "Using the $translation_format format for translation file(s)"
 else    
