@@ -37,7 +37,7 @@ else
 fi
 
 # FORMATTING
-if [[ $translation_format == "flat" ]] || [[ $translation_format == "levels" ]] 
+if [[ $translation_format == "flat" ]] || [[ $translation_format == "levels" ]] || [[ $translation_format == "pairs" ]]
 then 
     echo "Using the $translation_format format for translation file(s)"
 else    
@@ -47,7 +47,7 @@ fi
 
 LOCALIZATION_ENDPOINT="$localization_api_host/v1/translations/$namespace/$feature?format=$translation_format"   
 TRANSLATIONS=`/usr/bin/curl -v --URL "$LOCALIZATION_ENDPOINT"`
-if [[ "$individual_locale_files" = true ]] & [[ $translation_format != "pairs" ]]
+if [[ "$individual_locale_files" = true ]] && [[ $translation_format != "pairs" ]]
 then
     echo $TRANSLATIONS | jq -r '. | keys[]' | 
     while IFS= read -r locale; do 
