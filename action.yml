@@ -14,6 +14,9 @@ inputs:
   translation_folder:
     description: "folder where translation files must be created"
     required: true
+  translation_folder_overwrite:
+    description: "whether to overwrite pre-existing translations folder or not"
+    default: false
   translation_filename:
     default: auto_gen_translations.json
     description: "name of the translation file to be created (aplies only for single translation file)"
@@ -43,5 +46,5 @@ runs:
   steps:
     - name: "Get translations"
       id: pr
-      run: chmod +x "${{ github.action_path }}/scripts/gettranslations.sh" && "${{ github.action_path }}/scripts/gettranslations.sh" -h '${{ inputs.localization_api_host }}' -f '${{ inputs.translation_format }}' -d '${{ inputs.translation_folder }}' -i '${{ inputs.individual_locale_files }}' -n '${{ inputs.translation_filename }}' -p '${{ inputs.branch_prefix }}' -c '${{ inputs.commit_changes }}' -b '${{ inputs.create_branch }}' -m '${{ inputs.main_branch_name }}' -s '${{ inputs.namespace }}' -e '${{ inputs.feature }}'
+      run: chmod +x "${{ github.action_path }}/scripts/gettranslations.sh" && "${{ github.action_path }}/scripts/gettranslations.sh" -h '${{ inputs.localization_api_host }}' -f '${{ inputs.translation_format }}' -d '${{ inputs.translation_folder }}' -r '${{ inputs.translation_folder_overwrite }}' -i '${{ inputs.individual_locale_files }}' -n '${{ inputs.translation_filename }}' -p '${{ inputs.branch_prefix }}' -c '${{ inputs.commit_changes }}' -b '${{ inputs.create_branch }}' -m '${{ inputs.main_branch_name }}' -s '${{ inputs.namespace }}' -e '${{ inputs.feature }}'
       shell: bash

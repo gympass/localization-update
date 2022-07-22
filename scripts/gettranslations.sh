@@ -1,11 +1,12 @@
 #!/bin/bash
 
-while getopts h:f:d:i:n:p:c:b:m:s:e: flag
+while getopts h:f:d:r:i:n:p:c:b:m:s:e: flag
 do
     case "${flag}" in
         h) localization_api_host=${OPTARG};;
         f) translation_format=${OPTARG};;
         d) translation_folder=${OPTARG};;
+        r) translation_folder_overwrite=${OPTARG};;
         i) individual_locale_files=${OPTARG};;
         n) translation_filename=${OPTARG};;
         p) branch_prefix=${OPTARG};;
@@ -23,7 +24,14 @@ git pull
 
 if [[ -d "$translation_folder" ]]
 then
-    echo "Translations directory already exists. Gonna create new translation file inside it."
+    if [ "$translation_folder_overwrite" = true ]
+    then
+        echo "Translations directory already exists. Overwrite is enabled, so the directory will be overwritten."
+        rm -rf "$translation_folder"
+        mkdir -p ./"$translation_folder"
+    else
+        echo "Translations directory already exists. Gonna create new translation file inside it."
+    fi    
 else
     mkdir -p ./"$translation_folder"
 fi
