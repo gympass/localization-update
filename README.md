@@ -45,6 +45,7 @@ In the table bellow you see the possible parameters and theys purpose:
 | localization_api_host   | The localization-api host from where to get <br /> the translations | yes  | |
 | translation_format      | The format of the json containing the <br /> translation keys. Possible values are: <br /> flat <br /> levels | yes | |
 | translation_folder      | The folder on where the translation files are <br /> going to be created | yes | | 
+| translation_folder_overwrite | Whether to overwrite a pre-existing translations <br /> folder or not | no | false |
 | individual_locale_files | Indicates wheter to create an individual file <br /> for each locale or not | no | false |
 | translation_filename    | The name of the file containing the translation <br /> keys. This applies only if the 'individual_locale_files' <br /> parameter is set to false | no | auto_gen_translations.json |
 | commit_changes          | Indicate whether the translation files are <br /> going to be commited or not | no | true |
