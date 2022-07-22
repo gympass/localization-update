@@ -1,6 +1,16 @@
 {
-  "footer.apps.store.text": "Scarica la nostra app per scoprire un mondo di risorse online o in presenza dedicate al benessere di mente, corpo e stato d’animo.",
-  "footer.store.apple": "App Store",
-  "footer.store.google": "Google Play",
-  "logout": "Esci"
+  "account_host.manager": {
+    "footer": {
+      "apps": {
+        "store": {
+          "text": "Scarica la nostra app per scoprire un mondo di risorse online o in presenza dedicate al benessere di mente, corpo e stato d’animo."
+        }
+      },
+      "store": {
+        "apple": "App Store",
+        "google": "Google Play"
+      }
+    },
+    "logout": "Esci"
+  }
 }

@@ -1,6 +1,16 @@
 {
-  "footer.apps.store.text": "",
-  "footer.store.apple": "App Store",
-  "footer.store.google": "Google Play",
-  "logout": "Log out"
+  "account_host.manager": {
+    "footer": {
+      "apps": {
+        "store": {
+          "text": ""
+        }
+      },
+      "store": {
+        "apple": "App Store",
+        "google": "Google Play"
+      }
+    },
+    "logout": "Log out"
+  }
 }

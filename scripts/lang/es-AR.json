@@ -1,6 +1,16 @@
 {
-  "footer.apps.store.text": "Descargá nuestra app para descubrir muchos recursos de bienestar presenciales y online para tu cuerpo, mente y estado de ánimo.",
-  "footer.store.apple": "App Store",
-  "footer.store.google": "Google Play",
-  "logout": "Cerrar sesión"
+  "account_host.manager": {
+    "footer": {
+      "apps": {
+        "store": {
+          "text": "Descargá nuestra app para descubrir muchos recursos de bienestar presenciales y online para tu cuerpo, mente y estado de ánimo."
+        }
+      },
+      "store": {
+        "apple": "App Store",
+        "google": "Google Play"
+      }
+    },
+    "logout": "Cerrar sesión"
+  }
 }
