@@ -52,7 +52,7 @@ then
     echo $TRANSLATIONS | jq -r '. | keys[]' | 
     while IFS= read -r locale; do 
         LOCALE_FILENAME=$(echo "$locale" | sed -r 's/[_]+/-/g')
-        echo $TRANSLATIONS | jq '.'"$locale"'' > ./"$translation_folder"/"$LOCALE_FILENAME.json"
+        echo $TRANSLATIONS | jq '.'$locale'' > ./"$translation_folder"/"$LOCALE_FILENAME.json"
     done
 else
     echo $TRANSLATIONS | jq > ./"$translation_folder"/"$translation_filename"
