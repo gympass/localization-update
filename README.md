@@ -81,6 +81,7 @@ jobs:
         localization_api_host: https://localization-api.gympass.com
         translation_format: flat
         translation_folder: lang
+        translation_folder_overwrite: true
         translation_filename: trs.json
         individual_locale_files: true
         commit_changes: true
