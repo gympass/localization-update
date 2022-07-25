@@ -17,7 +17,7 @@ do
         s) namespace=${OPTARG};;
         e) feature=${OPTARG};;
         t) separator=${OPTARG};;
-        l) omit_key_first_level==${OPTARG};;
+        l) omit_key_first_level=${OPTARG};;
     esac
 done
 
