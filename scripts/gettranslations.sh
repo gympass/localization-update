@@ -50,7 +50,7 @@ fi
 if [ "$separator" == "" ]
 then
     separator="."
-if
+fi
 
 LOCALIZATION_ENDPOINT="$localization_api_host/v1/translations/$namespace/$feature?format=$translation_format&separator=$separator&omit_key_first_level=$omit_key_first_level"   
 TRANSLATIONS=`/usr/bin/curl -v --URL "$LOCALIZATION_ENDPOINT"`
