@@ -49,11 +49,14 @@ In the table bellow you see the possible parameters and theys purpose:
 | individual_locale_files | Indicates wheter to create an individual file <br /> for each locale or not | no | false |
 | translation_filename    | The name of the file containing the translation <br /> keys. This applies only if the 'individual_locale_files' <br /> parameter is set to false | no | auto_gen_translations.json |
 | commit_changes          | Indicate whether the translation files are <br /> going to be commited or not | no | true |
+| commit_message          | A message to be included in the commit | no | new translations |
 | create_branch           | Indicates wheather to create a branch with the <br /> new translation files or not. <br /> If set to false and the 'commit_changes' is set <br /> to true, the commit is made into the master branch. | no | true |
 | branch_prefix           | Defines a prefix to be used in the branch name. <br /> Only applies if the 'create_branch' parameter is <br /> set to true | no | auto_gen_translations |
 | main_branch_name        | Indicates the name of the main branch of the repository. <br /> The value defined here will define where the commits are <br /> made if the 'create_branch' parameter is set to false. | no | master |
 | namespace               | The namespace in the localization service from where to get <br /> translation keys. | yes | |
 | feature                 | The feature of the application. If all the keys, of all the features <br /> are wanted, this parameter should be set with the same <br /> value as the 'namespace' parameter | yes | 
+| separator               | A character or string to be used as separator between the parts of the keys | no | . |
+| omit_key_first_level    | Whether to omit or not the first part of the key name, which is defined in<br /> the feature parameter | no | false | 
 <br />
 <br />
 ### Example
