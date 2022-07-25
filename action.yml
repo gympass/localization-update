@@ -29,6 +29,9 @@ inputs:
   commit_changes:
     default: true
     description: "whether to commit the new translations files to the git repository or not"
+  commit_message:
+    description: "a commit message"
+    required: false
   create_branch: 
     default: true
     description: "whether to create a new branch with translations or not"
@@ -41,10 +44,16 @@ inputs:
   feature:
     description: "the feature to be get from the translation keys"
     required: true
+  separator:
+    description: "a character or string to be used as separator of the parts of the keys"
+    required: false
+  omit_key_first_level:
+    description: "whether to omit the first part of the key name, which is specified in the feature parameter, or not"
+    required: false
 runs: 
   using: composite
   steps:
     - name: "Get translations"
       id: pr
-      run: chmod +x "${{ github.action_path }}/scripts/gettranslations.sh" && "${{ github.action_path }}/scripts/gettranslations.sh" -h '${{ inputs.localization_api_host }}' -f '${{ inputs.translation_format }}' -d '${{ inputs.translation_folder }}' -r '${{ inputs.translation_folder_overwrite }}' -i '${{ inputs.individual_locale_files }}' -n '${{ inputs.translation_filename }}' -p '${{ inputs.branch_prefix }}' -c '${{ inputs.commit_changes }}' -b '${{ inputs.create_branch }}' -m '${{ inputs.main_branch_name }}' -s '${{ inputs.namespace }}' -e '${{ inputs.feature }}'
+      run: chmod +x "${{ github.action_path }}/scripts/gettranslations.sh" && "${{ github.action_path }}/scripts/gettranslations.sh" -h '${{ inputs.localization_api_host }}' -f '${{ inputs.translation_format }}' -d '${{ inputs.translation_folder }}' -r '${{ inputs.translation_folder_overwrite }}' -i '${{ inputs.individual_locale_files }}' -n '${{ inputs.translation_filename }}' -p '${{ inputs.branch_prefix }}' -c '${{ inputs.commit_changes }}' -o '${{ inputs.commit_message }}' -b '${{ inputs.create_branch }}' -m '${{ inputs.main_branch_name }}' -s '${{ inputs.namespace }}' -e '${{ inputs.feature }}' -t '${{ inputs.separator }}' -l '${{ inputs.omit_key_first_level }}'
       shell: bash

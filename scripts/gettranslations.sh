@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts h:f:d:r:i:n:p:c:b:m:s:e: flag
+while getopts h:f:d:r:i:n:p:c:o:b:m:s:e:t:l: flag
 do
     case "${flag}" in
         h) localization_api_host=${OPTARG};;
@@ -11,10 +11,13 @@ do
         n) translation_filename=${OPTARG};;
         p) branch_prefix=${OPTARG};;
         c) commit_changes=${OPTARG};;
+        o) commit_message=${OPTARG};;
         b) create_branch=${OPTARG};;
         m) main_branch_name=${OPTARG};;
         s) namespace=${OPTARG};;
         e) feature=${OPTARG};;
+        t) separator=${OPTARG};;
+        l) omit_key_first_level==${OPTARG};;
     esac
 done
 
@@ -36,7 +39,6 @@ else
     mkdir -p ./"$translation_folder"
 fi
 
-# FORMATTING
 if [[ $translation_format == "flat" ]] || [[ $translation_format == "levels" ]] || [[ $translation_format == "pairs" ]]
 then 
     echo "Using the $translation_format format for translation file(s)"
@@ -45,7 +47,12 @@ else
     translation_format="flat"
 fi
 
-LOCALIZATION_ENDPOINT="$localization_api_host/v1/translations/$namespace/$feature?format=$translation_format"   
+if [ "$separator" == "" ]
+then
+    separator="."
+if
+
+LOCALIZATION_ENDPOINT="$localization_api_host/v1/translations/$namespace/$feature?format=$translation_format&separator=$separator&omit_key_first_level=$omit_key_first_level"   
 TRANSLATIONS=`/usr/bin/curl -v --URL "$LOCALIZATION_ENDPOINT"`
 if [[ "$individual_locale_files" = true ]] && [[ $translation_format != "pairs" ]]
 then
@@ -69,8 +76,12 @@ then
         git checkout -b $branch
     fi
 
+    if [ "$commit_message" == "" ]
+    then
+        commit_message = "new translations"
+    fi 
     git add .
-    GITHUB_RESPONSE=$(git commit -m "new translations")
+    GITHUB_RESPONSE=$(git commit -m '"'"$commit_message"'"')
     GITHUB_RESPONSE_UPTODATE="nothing to commit, working tree clean" 
 
     if [[ "$GITHUB_RESPONSE" == *"$GITHUB_RESPONSE_UPTODATE"* ]]
