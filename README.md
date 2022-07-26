@@ -69,7 +69,7 @@ steps:
       with:
         token: ${{ secrets.SECRET_CONTAINING_THE_TOKEN }}
 ```
-<b>Example</b>
+### Putting all together
 
 This is an example of a workflow yaml using this action:
 
