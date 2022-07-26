@@ -81,7 +81,7 @@ then
         commit_message = "new translations"
     fi 
     git add .
-    GITHUB_RESPONSE=$(git commit -m "$commit_message")
+    GITHUB_RESPONSE=$(git commit -m "$commit_message [skip ci]" )
     GITHUB_RESPONSE_UPTODATE="nothing to commit, working tree clean" 
 
     if [[ "$GITHUB_RESPONSE" == *"$GITHUB_RESPONSE_UPTODATE"* ]]
