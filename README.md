@@ -59,7 +59,18 @@ In the table bellow you see the possible parameters and theys purpose:
 | omit_key_first_level    | Whether to omit or not the first part of the key name, which is defined in the feature parameter | no | false | 
 <br />
 <br />
-### Example
+## Branch protection rules
+
+If the repository is configured to have branch protection rules and commits directly to the master branch are not allowed, the action is not going to be able to commit the new translation files when configured to commit to the master.
+In this case, you will need to include a secret in your repository, containing a personal token which have the administrator permissions, then include the secret to the workflow, like in the example:
+
+```
+steps:
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.SECRET_CONTAINING_THE_TOKEN }}
+```
+<b>Example</b>
 
 This is an example of a workflow yaml using this action:
 
@@ -77,6 +88,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.SECRET_CONTAINING_THE_TOKEN }}
 
     - name: Update translations
       uses: gympass/localization-update@v1
