@@ -57,6 +57,7 @@ In the table bellow you see the possible parameters and theys purpose:
 | feature                 | The feature of the application. If all the keys, of all the features <br /> are wanted, this parameter should be set with the same <br /> value as the 'namespace' parameter | yes | 
 | separator               | A character or string to be used as separator between the parts of the keys | no | . (period) |
 | omit_key_first_level    | Whether to omit or not the first part of the key name, which is defined in the feature parameter | no | false | 
+| on_error_bypass         | Whether to finish the execution of the script with success, even it fails, or not | no | false |
 
 ### Branch protection rules
 
