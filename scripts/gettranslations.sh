@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts h:f:d:r:i:n:p:c:o:b:m:s:e:t:l: flag
+while getopts h:f:d:r:i:n:p:c:o:b:m:s:e:t:l:k: flag
 do
     case "${flag}" in
         h) localization_api_host=${OPTARG};;
@@ -18,26 +18,13 @@ do
         e) feature=${OPTARG};;
         t) separator=${OPTARG};;
         l) omit_key_first_level=${OPTARG};;
+        k) on_error_bypass=${OPTARG};;
     esac
 done
 
 git config user.name github-actions
 git config user.email github-actions@github.com
 git pull
-
-if [[ -d "$translation_folder" ]]
-then
-    if [ "$translation_folder_overwrite" = true ]
-    then
-        echo "Translations directory already exists. Overwrite is enabled, so the directory will be overwritten."
-        rm -rf "$translation_folder"
-        mkdir -p ./"$translation_folder"
-    else
-        echo "Translations directory already exists. Gonna create new translation file inside it."
-    fi    
-else
-    mkdir -p ./"$translation_folder"
-fi
 
 if [[ $translation_format == "flat" ]] || [[ $translation_format == "levels" ]] || [[ $translation_format == "pairs" ]]
 then 
@@ -53,9 +40,39 @@ then
 fi
 
 LOCALIZATION_ENDPOINT="$localization_api_host/v1/translations/$namespace/$feature?format=$translation_format&separator=$separator&omit_key_first_level=$omit_key_first_level"   
-TRANSLATIONS=`/usr/bin/curl -v --URL "$LOCALIZATION_ENDPOINT"`
-if [[ "$individual_locale_files" = true ]] && [[ $translation_format != "pairs" ]]
+RES=$(/usr/bin/curl -s -w "\n%{http_code}" $LOCALIZATION_ENDPOINT)
+
+TRANSLATIONS=${RES:0:${#RES}-4}
+HTTP_STATUS_CODE=$(printf "%s" "$RES" | tail -c 3)
+
+if [ "$HTTP_STATUS_CODE" -ne "200" ]  
 then
+    echo "Failed to get translations from localization-api: $HTTP_STATUS_CODE"
+    if [ "$on_error_bypass" = true ]
+    then
+        exit 0
+    fi
+    exit 1
+fi
+
+TRANSLATIONS=$(echo $TRANSLATIONS | jq 'del(.statusCode)')
+
+if [[ -d "$translation_folder" ]]
+then
+    if [ "$translation_folder_overwrite" = true ]
+    then
+        echo "Translations directory already exists. Overwrite is enabled, so the directory will be overwritten."
+        rm -rf "$translation_folder"
+        mkdir -p ./"$translation_folder"
+    else
+        echo "Translations directory already exists. Gonna create new translation file inside it."
+    fi    
+else
+    mkdir -p ./"$translation_folder"
+fi
+
+if [[ "$individual_locale_files" = true ]] && [[ $translation_format != "pairs" ]]
+then    
     echo $TRANSLATIONS | jq -r '. | keys[]' | 
     while IFS= read -r locale; do 
         LOCALE_FILENAME=$(echo "$locale" | sed -r 's/[_]+/-/g')
@@ -65,6 +82,8 @@ else
     echo $TRANSLATIONS | jq > ./"$translation_folder"/"$translation_filename"
     echo 'New translations file created'
 fi
+
+cp ./README.tpl ./"$translation_folder/README.md"
 
 if [ "$commit_changes" = true ]
 then
