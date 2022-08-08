@@ -83,7 +83,7 @@ else
     echo 'New translations file created'
 fi
 
-cp ./README.tpl ./"$translation_folder/README.md"
+echo "# Do not change these files manually\nEvery change committed to the files in this folder are going to be replaced by the latest version of the translations available in the localization platform." > ./"$translation_folder/README.md"
 
 if [ "$commit_changes" = true ]
 then
