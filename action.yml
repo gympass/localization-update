@@ -50,6 +50,9 @@ inputs:
   omit_key_first_level:
     description: "whether to omit the first part of the key name, which is specified in the feature parameter, or not"
     required: false
+  on_error_bypass:
+    description: "Whether to finish the execution of the script with success, even it fails, or not"
+    required: false
 runs: 
   using: composite
   steps:
