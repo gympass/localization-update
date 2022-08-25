@@ -48,6 +48,9 @@ HTTP_STATUS_CODE=$(printf "%s" "$RES" | tail -c 3)
 if [ "$HTTP_STATUS_CODE" -ne "200" ]  
 then
     echo "Failed to get translations from localization-api: $HTTP_STATUS_CODE"
+    FILES=(/"$translation_folder"/*)
+    if ! [ ${#FILES[@]} -gt 0 ]; then exit 1; fi
+
     if [ "$on_error_bypass" = true ]
     then
         exit 0
