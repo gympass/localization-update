@@ -13,7 +13,7 @@ Example:
     - uses: actions/checkout@v2
 
     - name: Update translations
-      uses: gympass/localization-update@v1
+      uses: gympass/localization-update@v2
 ```
 Is important to notice that this action is gonna run everytime a commit is made to the repository, so it will act accordingly to the configuration parameters defined for the action everytime a commit is made.
 If you don't want this to happen, you should define when this action should run by inserting an 'if' statement before it.
@@ -26,7 +26,7 @@ In the 'if' statement you can define the commit on which branch is gonna trigger
     - uses: actions/checkout@v2
 
     - name: Update translations
-      uses: gympass/localization-update@v1
+      uses: gympass/localization-update@v2
 ```
 In the example above, the action only runs if the commit is made to the 'mater' branche or a branch containing 'devint' in the name, otherwise it is skiped.
 <br />
@@ -92,7 +92,7 @@ jobs:
         token: ${{ secrets.SECRET_CONTAINING_THE_TOKEN }}
 
     - name: Update translations
-      uses: gympass/localization-update@v1
+      uses: gympass/localization-update@v2
       with:
         localization_api_host: https://localization-api.gympass.com
         translation_format: flat
